@@ -1,0 +1,3819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Winter Arc V4</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #050810;
+    --card: #0c121d;
+    --card2: #101927;
+    --line: #263449;
+    --text: #f4f7fc;
+    --muted: #8996a9;
+    --ice: #8ab8ff;
+    --green: #75e0a1;
+    --gold: #ffd66e;
+    --red: #ff8585;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    color: var(--text);
+
+    background:
+        radial-gradient(circle at 50% -15%, #213957 0%, transparent 38%),
+        radial-gradient(circle at 100% 40%, #101c31 0%, transparent 30%),
+        var(--bg);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
+    width: min(1250px, 100%);
+    margin: auto;
+    padding: 24px 18px 70px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    padding: 10px 0 20px;
+}
+
+.tag {
+    color: var(--ice);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+h1 {
+    margin: 8px 0 3px;
+    font-size: clamp(42px, 7vw, 76px);
+    letter-spacing: -3px;
+    line-height: .95;
+}
+
+.subtitle {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 8px 0 18px;
+}
+
+.nav button {
+    color: var(--muted);
+    background: #0c131f;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 9px 13px;
+    transition: .2s ease;
+}
+
+.nav button:hover {
+    color: var(--text);
+    border-color: var(--ice);
+}
+
+.nav button.active {
+    color: var(--text);
+    background: linear-gradient(135deg, #203552, #17263c);
+    border-color: var(--ice);
+}
+
+/* =========================
+   PAGES
+========================= */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,25,39,.96),
+            rgba(8,13,22,.96)
+        );
+
+    border: 1px solid var(--line);
+    border-radius: 19px;
+    padding: 19px;
+    margin-bottom: 14px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.2);
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 850;
+    margin-bottom: 14px;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 14px;
+}
+
+.hero-main {
+    min-height: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hero-rank {
+    font-size: 13px;
+    color: var(--ice);
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.rank-name {
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 950;
+    letter-spacing: -4px;
+    margin: 5px 0;
+}
+
+.rank-description {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.xp-number {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 13px;
+    margin: 10px 0 7px;
+    overflow: hidden;
+    border-radius: 30px;
+    background: #05080d;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--ice),
+            var(--green)
+        );
+
+    transition: width .45s ease;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 11px;
+}
+
+.stat {
+    background: #090f18;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    margin-top: 5px;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+/* =========================
+   DAILY
+========================= */
+
+.date-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.date-row h2 {
+    margin: 0 0 4px;
+}
+
+.controls {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.small-btn {
+    color: var(--text);
+    background: #111a28;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 11px;
+}
+
+.small-btn:hover {
+    border-color: var(--ice);
+}
+
+/* =========================
+   CHECKLIST
+========================= */
+
+.checklist {
+    display: grid;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #090f18;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+.check:hover {
+    border-color: #49627f;
+}
+
+.check input {
+    width: 19px;
+    height: 19px;
+    accent-color: var(--green);
+}
+
+.check.done span {
+    color: #687486;
+    text-decoration: line-through;
+}
+
+/* =========================
+   DAILY INPUTS
+========================= */
+
+.daily-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+    margin-top: 15px;
+}
+
+.input-card {
+    background: #090f18;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    padding: 13px;
+}
+
+.input-card label {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+}
+
+.input-card input {
+    width: 100%;
+    color: var(--text);
+    background: #111a28;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 9px;
+    outline: none;
+}
+
+.input-card input:focus {
+    border-color: var(--ice);
+}
+
+/* =========================
+   XP ACTIONS
+========================= */
+
+.xp-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+}
+
+.xp-action {
+    padding: 14px;
+    border-radius: 13px;
+    background: #090f18;
+    border: 1px solid var(--line);
+}
+
+.xp-action strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.xp-action span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote {
+    text-align: center;
+    color: var(--muted);
+    padding: 15px 0;
+    font-style: italic;
+}
+
+/* =========================
+   TIMER
+========================= */
+
+.timer {
+    text-align: center;
+}
+
+.timer-display {
+    font-size: clamp(58px, 11vw, 105px);
+    font-weight: 950;
+    letter-spacing: -5px;
+    margin: 15px 0;
+}
+
+.timer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.timer-buttons button,
+.mode button {
+    color: var(--text);
+    background: #111a28;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 10px 15px;
+}
+
+.timer-buttons button:hover,
+.mode button:hover {
+    border-color: var(--ice);
+}
+
+.mode {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.mode button {
+    color: var(--muted);
+    padding: 8px 12px;
+}
+
+.mode button.active {
+    color: white;
+    background: #203552;
+    border-color: var(--ice);
+}
+
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.calendar-header h2 {
+    margin: 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-top: 15px;
+}
+
+.calendar-weekday {
+    text-align: center;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 5px;
+}
+
+.calendar-day {
+    min-height: 62px;
+    padding: 7px;
+    border-radius: 10px;
+    background: #090f18;
+    border: 1px solid var(--line);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.calendar-day:hover {
+    border-color: var(--ice);
+    transform: translateY(-1px);
+}
+
+.calendar-day.empty {
+    background: transparent;
+    border-color: transparent;
+    cursor: default;
+}
+
+.calendar-date {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.calendar-status {
+    font-size: 15px;
+    text-align: center;
+}
+
+.calendar-day.complete {
+    border-color: var(--green);
+    background: rgba(117,224,161,.12);
+}
+
+.calendar-day.partial {
+    border-color: var(--gold);
+    background: rgba(255,214,110,.08);
+}
+
+.calendar-day.today {
+    outline: 2px solid var(--ice);
+    outline-offset: 1px;
+}
+
+.calendar-day.selected {
+    box-shadow: 0 0 0 2px rgba(138,184,255,.3);
+}
+
+.calendar-legend {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* =========================
+   CHARTS
+========================= */
+
+.chart-card {
+    background: #090f18;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 12px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.chart-header strong {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.chart-header span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.chart-card canvas {
+    display: block;
+    width: 100%;
+    height: 220px;
+}
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+.achievements {
+    display: grid;
+    gap: 9px;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    border-radius: 13px;
+    background: #090f18;
+    border: 1px solid var(--line);
+}
+
+.achievement.locked {
+    opacity: .45;
+}
+
+.achievement-icon {
+    font-size: 24px;
+}
+
+.achievement small {
+    color: var(--muted);
+}
+
+/* =========================
+   QUESTS
+========================= */
+
+.quest {
+    display: grid;
+    gap: 9px;
+}
+
+.quest-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 13px;
+    background: #090f18;
+    border: 1px solid var(--line);
+}
+
+.quest-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quest-icon {
+    font-size: 23px;
+}
+
+.quest-status {
+    color: var(--green);
+    font-weight: 800;
+    font-size: 12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 850px) {
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width: 560px) {
+
+    .app {
+        padding: 15px 10px 45px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .daily-inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .xp-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .stat {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 21px;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .rank-name {
+        letter-spacing: -2px;
+    }
+
+    .chart-card {
+        padding: 10px;
+    }
+
+    .calendar-grid {
+        gap: 3px;
+    }
+
+    .calendar-day {
+        min-height: 48px;
+        padding: 5px;
+    }
+
+    .calendar-status {
+        font-size: 12px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+<div class="tag">
+    JEE • GYM • ASCENDANT • BIKE
+</div>
+
+<h1>
+    ❄️ WINTER ARC
+</h1>
+
+<p class="subtitle">
+    September 1 → March 31 · Build the version of yourself
+    you don't want to disappoint.
+</p>
+
+</header>
+
+
+<nav class="nav">
+
+<button class="active"
+        onclick="showPage('dashboard', this)">
+    🏠 DASHBOARD
+</button>
+
+<button onclick="showPage('focus', this)">
+    ⏱️ FOCUS
+</button>
+
+<button onclick="showPage('calendar', this)">
+    📅 CALENDAR
+</button>
+
+<button onclick="showPage('stats', this)">
+    📊 ANALYTICS
+</button>
+
+<button onclick="showPage('arc', this)">
+    🏆 ARC
+</button>
+
+</nav>
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section id="dashboard" class="page active">
+
+<div class="hero">
+
+<div class="card hero-main">
+
+<div>
+
+<div class="hero-rank">
+    CURRENT RANK
+</div>
+
+<div class="rank-name" id="rankName">
+    FROZEN
+</div>
+
+<div class="rank-description" id="rankDescription">
+    The arc hasn't started yet.
+</div>
+
+</div>
+
+<div>
+
+<div class="xp-number">
+
+<span id="xpCurrent">0</span>
+
+XP /
+
+<span id="xpNext">1000</span>
+
+XP
+
+</div>
+
+<div class="progress-bar">
+
+<div class="progress" id="xpProgress"></div>
+
+</div>
+
+<div class="progress-info">
+
+<span>Rank progress</span>
+
+<span id="xpPercent">0%</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">
+    ❄️ ARC STATUS
+</div>
+
+<div class="stat" style="margin-bottom:9px">
+
+<div class="stat-label">
+    DAY
+</div>
+
+<div class="stat-value" id="dayNumber">
+    Day 1 / 212
+</div>
+
+</div>
+
+<div class="stat" style="margin-bottom:9px">
+
+<div class="stat-label">
+    STREAK
+</div>
+
+<div class="stat-value">
+    🔥 <span id="streak">0</span>
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-label">
+    COMPLETION
+</div>
+
+<div class="stat-value">
+    <span id="arcPercent">0</span>%
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DAILY -->
+
+<div class="card">
+
+<div class="date-row">
+
+<div>
+
+<h2 id="todayDate">
+    Loading...
+</h2>
+
+<div class="muted">
+    Daily mission
+</div>
+
+</div>
+
+<div class="controls">
+
+<button class="small-btn" onclick="changeDay(-1)">
+    ←
+</button>
+
+<button class="small-btn" onclick="goToday()">
+    Today
+</button>
+
+<button class="small-btn" onclick="changeDay(1)">
+    →
+</button>
+
+</div>
+
+</div>
+
+
+<div class="progress-bar">
+
+<div class="progress" id="dailyProgress"></div>
+
+</div>
+
+<div class="progress-info">
+
+<span id="dailyCount">
+    0 / 11
+</span>
+
+<span id="dailyPercent">
+    0%
+</span>
+
+</div>
+
+
+<div class="checklist" id="dailyChecklist"></div>
+
+
+<!-- DAILY TRACKING -->
+
+<div class="daily-inputs">
+
+<div class="input-card">
+
+<label>JEE HOURS</label>
+
+<input
+    id="jeeInput"
+    type="number"
+    min="0"
+    step="0.1"
+    placeholder="0"
+    onchange="updateDailyInput('jee', this.value)"
+>
+
+</div>
+
+<div class="input-card">
+
+<label>PYQs SOLVED</label>
+
+<input
+    id="pyqInput"
+    type="number"
+    min="0"
+    step="1"
+    placeholder="0"
+    onchange="updateDailyInput('pyq', this.value)"
+>
+
+</div>
+
+<div class="input-card">
+
+<label>GYM SESSION</label>
+
+<select
+    id="gymInput"
+    onchange="updateGym(this.value)"
+    style="
+        width:100%;
+        color:var(--text);
+        background:#111a28;
+        border:1px solid var(--line);
+        border-radius:9px;
+        padding:9px;
+        outline:none;
+    "
+>
+
+<option value="false">Not completed</option>
+<option value="true">Completed 💪</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- XP -->
+
+<div class="card">
+
+<div class="section-title">
+    ⚡ XP SOURCES
+</div>
+
+<div class="xp-actions">
+
+<div class="xp-action">
+<strong>📚 JEE</strong>
+<span>+100 XP per focused hour</span>
+</div>
+
+<div class="xp-action">
+<strong>📝 PYQs</strong>
+<span>+10 XP per question</span>
+</div>
+
+<div class="xp-action">
+<strong>🏋️ GYM</strong>
+<span>+150 XP per session</span>
+</div>
+
+<div class="xp-action">
+<strong>😴 SLEEP</strong>
+<span>Task completion gives XP</span>
+</div>
+
+<div class="xp-action">
+<strong>✅ FULL DAY</strong>
+<span>+250 XP</span>
+</div>
+
+<div class="xp-action">
+<strong>🔥 STREAK</strong>
+<span>+500 XP every 7 best-streak days</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QUICK STATS -->
+
+<div class="card">
+
+<div class="section-title">
+    📊 QUICK STATS
+</div>
+
+<div class="grid">
+
+<div class="stat">
+<div class="stat-label">JEE HOURS</div>
+<div class="stat-value" id="jeeTotal">0h</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">PYQs</div>
+<div class="stat-value" id="pyqTotal">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">GYM</div>
+<div class="stat-value" id="gymTotal">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">BEST STREAK</div>
+<div class="stat-value" id="bestStreak">0</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="quote">
+
+“A bad day doesn't ruin the arc.
+Quitting does.”
+
+<br><br>
+
+<strong>
+    JUST DON'T QUIT. 🗿❄️
+</strong>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FOCUS
+===================================================== -->
+
+<section id="focus" class="page">
+
+<div class="card timer">
+
+<div class="section-title">
+    📚 JEE FOCUS TIMER
+</div>
+
+<p class="muted">
+    Phone away. One task. Full focus.
+</p>
+
+<div class="mode">
+
+<button onclick="setTimer(25, this)">
+    25 MIN
+</button>
+
+<button class="active" onclick="setTimer(50, this)">
+    50 MIN
+</button>
+
+<button onclick="setTimer(90, this)">
+    90 MIN
+</button>
+
+</div>
+
+<div class="timer-display" id="timerDisplay">
+    50:00
+</div>
+
+<div class="timer-buttons">
+
+<button onclick="startTimer()">
+    ▶ START
+</button>
+
+<button onclick="pauseTimer()">
+    Ⅱ PAUSE
+</button>
+
+<button onclick="resetTimer()">
+    ↻ RESET
+</button>
+
+</div>
+
+<p class="muted" id="timerStatus">
+    Ready when you are.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CALENDAR
+===================================================== -->
+
+<section id="calendar" class="page">
+
+<div class="card">
+
+<div class="calendar-header">
+
+<div>
+
+<div class="section-title">
+    📅 WINTER ARC CALENDAR
+</div>
+
+<div class="muted">
+    September 2026 → March 2027
+</div>
+
+</div>
+
+<div class="controls">
+
+<button class="small-btn" onclick="changeMonth(-1)">
+    ←
+</button>
+
+<button class="small-btn" onclick="calendarToday()">
+    Today
+</button>
+
+<button class="small-btn" onclick="changeMonth(1)">
+    →
+</button>
+
+</div>
+
+</div>
+
+
+<h2 id="calendarMonth">
+    September 2026
+</h2>
+
+
+<div class="calendar-grid">
+
+<div class="calendar-weekday">SUN</div>
+<div class="calendar-weekday">MON</div>
+<div class="calendar-weekday">TUE</div>
+<div class="calendar-weekday">WED</div>
+<div class="calendar-weekday">THU</div>
+<div class="calendar-weekday">FRI</div>
+<div class="calendar-weekday">SAT</div>
+
+</div>
+
+
+<div
+    class="calendar-grid"
+    id="calendarGrid">
+</div>
+
+
+<div class="calendar-legend">
+
+<span>🟩 Complete</span>
+<span>🟨 Partial</span>
+<span>⬜ Not started</span>
+<span>🔵 Selected</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ANALYTICS
+===================================================== -->
+
+<section id="stats" class="page">
+
+<div class="card">
+
+<div class="section-title">
+    📈 WINTER ARC PERFORMANCE
+</div>
+
+
+<div class="chart-card">
+
+<div class="chart-header">
+<strong>JEE HOURS</strong>
+<span>Last 14 days</span>
+</div>
+
+<canvas id="jeeChart"></canvas>
+
+</div>
+
+
+<div class="chart-card">
+
+<div class="chart-header">
+<strong>DAILY COMPLETION</strong>
+<span>Last 14 days</span>
+</div>
+
+<canvas id="completionChart"></canvas>
+
+</div>
+
+
+<div class="chart-card">
+
+<div class="chart-header">
+<strong>XP GROWTH</strong>
+<span>Last 14 days</span>
+</div>
+
+<canvas id="xpChart"></canvas>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">
+    📊 ANALYTICS
+</div>
+
+<div class="grid">
+
+<div class="stat">
+<div class="stat-label">TOTAL XP</div>
+<div class="stat-value" id="statsXP">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">FULL DAYS</div>
+<div class="stat-value" id="fullDays">0</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">JEE HOURS</div>
+<div class="stat-value" id="statsJee">0h</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">GYM SESSIONS</div>
+<div class="stat-value" id="statsGym">0</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">
+    🏆 ACHIEVEMENTS
+</div>
+
+<div id="achievements" class="achievements"></div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ARC
+===================================================== -->
+
+<section id="arc" class="page">
+
+<div class="card">
+
+<div class="section-title">
+    🗿 THE MAIN QUEST
+</div>
+
+<div class="quest">
+
+<div class="quest-item">
+<div class="quest-left">
+<div class="quest-icon">📚</div>
+<strong>Crack JEE</strong>
+</div>
+<div class="quest-status">MAIN QUEST</div>
+</div>
+
+<div class="quest-item">
+<div class="quest-left">
+<div class="quest-icon">🏋️</div>
+<strong>Build strength</strong>
+</div>
+<div class="quest-status">3× / WEEK</div>
+</div>
+
+<div class="quest-item">
+<div class="quest-left">
+<div class="quest-icon">🎮</div>
+<strong>Hit ASCENDANT</strong>
+</div>
+<div class="quest-status">RANKED</div>
+</div>
+
+<div class="quest-item">
+<div class="quest-left">
+<div class="quest-icon">🏍️</div>
+<strong>Earn the bike</strong>
+</div>
+<div class="quest-status">ENDGAME</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">
+    🏆 RANKS
+</div>
+
+<p>❄️ <strong>F — FROZEN</strong></p>
+<p>🧊 <strong>D — DISCIPLINED</strong></p>
+<p>🔹 <strong>C — CONSISTENT</strong></p>
+<p>🏋️ <strong>B — BUILDER</strong></p>
+<p>⚡ <strong>A — ASCENDING</strong></p>
+<p>🔥 <strong>S — WINTER BEAST</strong></p>
+<p>🗿 <strong>SS — UNBREAKABLE</strong></p>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-title">
+    🎯 RULES
+</div>
+
+<p>1. Never miss twice.</p>
+<p>2. JEE before Valorant.</p>
+<p>3. Gym 3× weekly.</p>
+<p>4. Sleep is non-negotiable.</p>
+<p>5. Don't chase perfect days — chase consistency.</p>
+
+</div>
+
+
+<div class="quote">
+
+📚 → 🏋️ → 🎮 → 🏍️
+
+<br><br>
+
+<strong>
+    JUST DON'T QUIT. 🗿❄️
+</strong>
+
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   WINTER ARC CONFIG
+========================================================= */
+
+const START_DATE =
+    new Date(2026, 8, 1);
+
+const END_DATE =
+    new Date(2027, 2, 31);
+
+const TASKS = [
+
+    "Wake up on time",
+    "JEE Deep Work",
+    "Gym / Recovery",
+    "Hit protein target",
+    "Drink enough water",
+    "JEE Questions / PYQs",
+    "Revision",
+    "Error notebook",
+    "Focused Valorant only",
+    "Plan tomorrow",
+    "Sleep by 9:30 PM"
+
+];
+
+
+const RANKS = [
+
+    {
+        name: "FROZEN",
+        min: 0,
+        max: 1000,
+        description:
+            "The arc hasn't started yet."
+    },
+
+    {
+        name: "DISCIPLINED",
+        min: 1000,
+        max: 2500,
+        description:
+            "You're starting to build discipline."
+    },
+
+    {
+        name: "CONSISTENT",
+        min: 2500,
+        max: 5000,
+        description:
+            "Consistency is becoming your advantage."
+    },
+
+    {
+        name: "BUILDER",
+        min: 5000,
+        max: 10000,
+        description:
+            "You're building something serious."
+    },
+
+    {
+        name: "ASCENDING",
+        min: 10000,
+        max: 20000,
+        description:
+            "You're moving beyond your old limits."
+    },
+
+    {
+        name: "WINTER BEAST",
+        min: 20000,
+        max: 40000,
+        description:
+            "The arc is getting real."
+    },
+
+    {
+        name: "UNBREAKABLE",
+        min: 40000,
+        max: Infinity,
+        description:
+            "You refused to quit."
+    }
+
+];
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+let data =
+    JSON.parse(
+        localStorage.getItem("winterArcV4") || "{}"
+    );
+
+
+let selectedDate =
+    new Date();
+
+selectedDate.setHours(0,0,0,0);
+
+
+let calendarMonth =
+    new Date(2026, 8, 1);
+
+
+let timerSeconds =
+    50 * 60;
+
+let timerInitial =
+    50 * 60;
+
+let timerRunning =
+    false;
+
+let timerInterval =
+    null;
+
+
+/* =========================================================
+   DATE HELPERS
+========================================================= */
+
+function cloneDate(date) {
+
+    const d =
+        new Date(date);
+
+    d.setHours(0,0,0,0);
+
+    return d;
+
+}
+
+
+function dateKey(date) {
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+function totalDays() {
+
+    return Math.floor(
+        (
+            END_DATE -
+            START_DATE
+        ) / 86400000
+    ) + 1;
+
+}
+
+
+function getDayNumber(date) {
+
+    return Math.floor(
+        (
+            cloneDate(date) -
+            START_DATE
+        ) / 86400000
+    ) + 1;
+
+}
+
+
+function isWithinArc(date) {
+
+    const d =
+        cloneDate(date);
+
+    return (
+        d >= START_DATE &&
+        d <= END_DATE
+    );
+
+}
+
+
+/* =========================================================
+   STORAGE / DAILY DATA
+========================================================= */
+
+function save() {
+
+    localStorage.setItem(
+        "winterArcV4",
+        JSON.stringify(data)
+    );
+
+}
+
+
+function getDay(date) {
+
+    const key =
+        dateKey(date);
+
+    if (!data[key]) {
+
+        data[key] = {
+
+            checks:
+                new Array(
+                    TASKS.length
+                ).fill(false),
+
+            jee: 0,
+
+            pyq: 0,
+
+            gym: false,
+
+            focusMinutes: 0
+
+        };
+
+    }
+
+    return data[key];
+
+}
+
+
+/* =========================================================
+   XP ENGINE
+========================================================= */
+
+function calculateXP() {
+
+    let xp = 0;
+
+    Object.keys(data).forEach(key => {
+
+        const d =
+            data[key];
+
+        if (!d)
+            return;
+
+
+        xp +=
+            Number(d.jee || 0) * 100;
+
+
+        xp +=
+            Number(d.pyq || 0) * 10;
+
+
+        if (d.gym)
+            xp += 150;
+
+
+        if (d.checks) {
+
+            const completed =
+                d.checks.filter(Boolean).length;
+
+            xp +=
+                completed * 25;
+
+        }
+
+    });
+
+
+    const stats =
+        calculateStats();
+
+    xp +=
+        Math.floor(
+            stats.best / 7
+        ) * 500;
+
+
+    return Math.floor(xp);
+
+}
+
+
+/* =========================================================
+   RANK
+========================================================= */
+
+function getRank(xp) {
+
+    return (
+        RANKS.find(
+            rank =>
+                xp >= rank.min &&
+                xp < rank.max
+        )
+        || RANKS[RANKS.length - 1]
+    );
+
+}
+
+
+function renderRank() {
+
+    const xp =
+        calculateXP();
+
+    const rank =
+        getRank(xp);
+
+
+    document.getElementById(
+        "rankName"
+    ).textContent =
+        rank.name;
+
+
+    document.getElementById(
+        "rankDescription"
+    ).textContent =
+        rank.description;
+
+
+    document.getElementById(
+        "xpCurrent"
+    ).textContent =
+        xp.toLocaleString();
+
+
+    const nextRank =
+        RANKS.find(
+            r =>
+                r.min > xp
+        );
+
+
+    if (!nextRank) {
+
+        document.getElementById(
+            "xpNext"
+        ).textContent =
+            "MAX";
+
+        document.getElementById(
+            "xpProgress"
+        ).style.width =
+            "100%";
+
+        document.getElementById(
+            "xpPercent"
+        ).textContent =
+            "MAX";
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "xpNext"
+    ).textContent =
+        nextRank.min.toLocaleString();
+
+
+    const range =
+        nextRank.min -
+        rank.min;
+
+
+    const progress =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                (
+                    (xp - rank.min) /
+                    range
+                ) * 100
+            )
+        );
+
+
+    document.getElementById(
+        "xpProgress"
+    ).style.width =
+        progress + "%";
+
+
+    document.getElementById(
+        "xpPercent"
+    ).textContent =
+        Math.round(progress) + "%";
+
+}
+
+
+/* =========================================================
+   COMPLETION
+========================================================= */
+
+function completionCount(date) {
+
+    if (!isWithinArc(date))
+        return 0;
+
+
+    return getDay(date)
+        .checks
+        .filter(Boolean)
+        .length;
+
+}
+
+
+function isComplete(date) {
+
+    if (!isWithinArc(date))
+        return false;
+
+
+    return (
+        completionCount(date) ===
+        TASKS.length
+    );
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function calculateStats() {
+
+    let fullDays = 0;
+    let best = 0;
+    let current = 0;
+
+    let jeeTotal = 0;
+    let pyqTotal = 0;
+    let gymSessions = 0;
+
+
+    let cursor =
+        cloneDate(START_DATE);
+
+
+    while (
+        cursor <= END_DATE
+    ) {
+
+        const key =
+            dateKey(cursor);
+
+        const d =
+            data[key];
+
+
+        if (d) {
+
+            jeeTotal +=
+                Number(d.jee || 0);
+
+            pyqTotal +=
+                Number(d.pyq || 0);
+
+
+            if (d.gym)
+                gymSessions++;
+
+        }
+
+
+        if (
+            d &&
+            d.checks &&
+            d.checks.every(Boolean)
+        ) {
+
+            fullDays++;
+
+            current++;
+
+            best =
+                Math.max(
+                    best,
+                    current
+                );
+
+        } else {
+
+            current = 0;
+
+        }
+
+
+        cursor.setDate(
+            cursor.getDate() + 1
+        );
+
+    }
+
+
+    let streak = 0;
+
+    let today =
+        cloneDate(new Date());
+
+
+    if (today > END_DATE)
+        today =
+            cloneDate(END_DATE);
+
+
+    if (
+        today >= START_DATE
+    ) {
+
+        while (
+            today >= START_DATE &&
+            isComplete(today)
+        ) {
+
+            streak++;
+
+            today.setDate(
+                today.getDate() - 1
+            );
+
+        }
+
+    }
+
+
+    return {
+
+        fullDays,
+        best,
+        streak,
+        jeeTotal,
+        pyqTotal,
+        gymSessions
+
+    };
+
+}
+
+
+/* =========================================================
+   RENDER TODAY
+========================================================= */
+
+function renderToday() {
+
+    const d =
+        getDay(selectedDate);
+
+
+    document.getElementById(
+        "todayDate"
+    ).textContent =
+        selectedDate.toLocaleDateString(
+            undefined,
+            {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+
+    const day =
+        getDayNumber(selectedDate);
+
+
+    document.getElementById(
+        "dayNumber"
+    ).textContent =
+        "Day " +
+        Math.max(
+            1,
+            Math.min(
+                totalDays(),
+                day
+            )
+        ) +
+        " / " +
+        totalDays();
+
+
+    const completed =
+        completionCount(
+            selectedDate
+        );
+
+
+    const percent =
+        Math.round(
+            completed /
+            TASKS.length *
+            100
+        );
+
+
+    document.getElementById(
+        "dailyProgress"
+    ).style.width =
+        percent + "%";
+
+
+    document.getElementById(
+        "dailyCount"
+    ).textContent =
+        completed +
+        " / " +
+        TASKS.length;
+
+
+    document.getElementById(
+        "dailyPercent"
+    ).textContent =
+        percent + "%";
+
+
+    const list =
+        document.getElementById(
+            "dailyChecklist"
+        );
+
+
+    list.innerHTML = "";
+
+
+    TASKS.forEach(
+        (task, index) => {
+
+            const label =
+                document.createElement(
+                    "label"
+                );
+
+
+            label.className =
+                "check";
+
+
+            if (
+                d.checks[index]
+            ) {
+
+                label.classList.add(
+                    "done"
+                );
+
+            }
+
+
+            const checkbox =
+                document.createElement(
+                    "input"
+                );
+
+
+            checkbox.type =
+                "checkbox";
+
+            checkbox.checked =
+                d.checks[index];
+
+
+            checkbox.addEventListener(
+                "change",
+                () => {
+
+                    d.checks[index] =
+                        checkbox.checked;
+
+                    save();
+
+                    renderAll();
+
+                }
+            );
+
+
+            const span =
+                document.createElement(
+                    "span"
+                );
+
+
+            span.textContent =
+                task;
+
+
+            label.appendChild(
+                checkbox
+            );
+
+            label.appendChild(
+                span
+            );
+
+
+            list.appendChild(
+                label
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "jeeInput"
+    ).value =
+        d.jee || "";
+
+
+    document.getElementById(
+        "pyqInput"
+    ).value =
+        d.pyq || "";
+
+
+    document.getElementById(
+        "gymInput"
+    ).value =
+        String(
+            !!d.gym
+        );
+
+}
+
+
+/* =========================================================
+   DAILY INPUTS
+========================================================= */
+
+function updateDailyInput(
+    type,
+    value
+) {
+
+    const d =
+        getDay(selectedDate);
+
+
+    let number =
+        Number(value);
+
+
+    if (!Number.isFinite(number))
+        number = 0;
+
+
+    if (number < 0)
+        number = 0;
+
+
+    if (type === "jee") {
+
+        d.jee =
+            number;
+
+    }
+
+
+    if (type === "pyq") {
+
+        d.pyq =
+            Math.floor(number);
+
+    }
+
+
+    save();
+
+    renderAll();
+
+}
+
+
+function updateGym(value) {
+
+    const d =
+        getDay(selectedDate);
+
+
+    d.gym =
+        value === "true";
+
+
+    save();
+
+    renderAll();
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(
+    id,
+    button
+) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            page =>
+                page.classList.remove(
+                    "active"
+                )
+        );
+
+
+    const page =
+        document.getElementById(id);
+
+
+    if (page)
+        page.classList.add("active");
+
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(
+            btn =>
+                btn.classList.remove(
+                    "active"
+                )
+        );
+
+
+    if (button)
+        button.classList.add("active");
+
+
+    if (id === "calendar")
+        renderCalendar();
+
+
+    if (id === "stats")
+        renderGraphs();
+
+}
+
+
+/* =========================================================
+   DAY CONTROLS
+========================================================= */
+
+function changeDay(amount) {
+
+    selectedDate.setDate(
+        selectedDate.getDate() +
+        amount
+    );
+
+
+    if (
+        selectedDate <
+        START_DATE
+    ) {
+
+        selectedDate =
+            cloneDate(START_DATE);
+
+    }
+
+
+    if (
+        selectedDate >
+        END_DATE
+    ) {
+
+        selectedDate =
+            cloneDate(END_DATE);
+
+    }
+
+
+    renderAll();
+
+}
+
+
+function goToday() {
+
+    const now =
+        cloneDate(new Date());
+
+
+    if (
+        now < START_DATE
+    ) {
+
+        selectedDate =
+            cloneDate(START_DATE);
+
+    }
+
+    else if (
+        now > END_DATE
+    ) {
+
+        selectedDate =
+            cloneDate(END_DATE);
+
+    }
+
+    else {
+
+        selectedDate =
+            now;
+
+    }
+
+
+    renderAll();
+
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+function renderCalendar() {
+
+    const grid =
+        document.getElementById(
+            "calendarGrid"
+        );
+
+
+    if (!grid)
+        return;
+
+
+    grid.innerHTML = "";
+
+
+    const year =
+        calendarMonth.getFullYear();
+
+    const month =
+        calendarMonth.getMonth();
+
+
+    document.getElementById(
+        "calendarMonth"
+    ).textContent =
+        calendarMonth.toLocaleDateString(
+            undefined,
+            {
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    const firstDay =
+        new Date(
+            year,
+            month,
+            1
+        ).getDay();
+
+
+    const daysInMonth =
+        new Date(
+            year,
+            month + 1,
+            0
+        ).getDate();
+
+
+    for (
+        let i = 0;
+        i < firstDay;
+        i++
+    ) {
+
+        const empty =
+            document.createElement(
+                "div"
+            );
+
+        empty.className =
+            "calendar-day empty";
+
+        grid.appendChild(empty);
+
+    }
+
+
+    for (
+        let day = 1;
+        day <= daysInMonth;
+        day++
+    ) {
+
+        const date =
+            new Date(
+                year,
+                month,
+                day
+            );
+
+
+        const cell =
+            document.createElement(
+                "div"
+            );
+
+
+        cell.className =
+            "calendar-day";
+
+
+        const dateText =
+            document.createElement(
+                "div"
+            );
+
+
+        dateText.className =
+            "calendar-date";
+
+
+        dateText.textContent =
+            day;
+
+
+        const status =
+            document.createElement(
+                "div"
+            );
+
+
+        status.className =
+            "calendar-status";
+
+
+        if (
+            !isWithinArc(date)
+        ) {
+
+            cell.classList.add(
+                "outside"
+            );
+
+            status.textContent =
+                "—";
+
+        } else {
+
+            const count =
+                completionCount(date);
+
+
+            if (
+                count === TASKS.length
+            ) {
+
+                cell.classList.add(
+                    "complete"
+                );
+
+                status.textContent =
+                    "✓";
+
+            }
+
+            else if (
+                count > 0
+            ) {
+
+                cell.classList.add(
+                    "partial"
+                );
+
+                status.textContent =
+                    count +
+                    "/" +
+                    TASKS.length;
+
+            }
+
+            else {
+
+                status.textContent =
+                    "·";
+
+            }
+
+        }
+
+
+        const today =
+            cloneDate(new Date());
+
+
+        if (
+            dateKey(date) ===
+            dateKey(today)
+        ) {
+
+            cell.classList.add(
+                "today"
+            );
+
+        }
+
+
+        if (
+            dateKey(date) ===
+            dateKey(selectedDate)
+        ) {
+
+            cell.classList.add(
+                "selected"
+            );
+
+        }
+
+
+        cell.appendChild(
+            dateText
+        );
+
+        cell.appendChild(
+            status
+        );
+
+
+        if (
+            isWithinArc(date)
+        ) {
+
+            cell.onclick =
+                () => {
+
+                    selectedDate =
+                        cloneDate(date);
+
+                    renderAll();
+
+                    showPage(
+                        "dashboard",
+                        document.querySelector(
+                            '.nav button'
+                        )
+                    );
+
+                };
+
+        }
+
+
+        grid.appendChild(
+            cell
+        );
+
+    }
+
+}
+
+
+function changeMonth(amount) {
+
+    calendarMonth.setMonth(
+        calendarMonth.getMonth() +
+        amount
+    );
+
+
+    if (
+        calendarMonth <
+        new Date(2026, 8, 1)
+    ) {
+
+        calendarMonth =
+            new Date(2026, 8, 1);
+
+    }
+
+
+    if (
+        calendarMonth >
+        new Date(2027, 2, 1)
+    ) {
+
+        calendarMonth =
+            new Date(2027, 2, 1);
+
+    }
+
+
+    renderCalendar();
+
+}
+
+
+function calendarToday() {
+
+    const now =
+        cloneDate(new Date());
+
+
+    if (
+        now < START_DATE
+    ) {
+
+        selectedDate =
+            cloneDate(START_DATE);
+
+    }
+
+    else if (
+        now > END_DATE
+    ) {
+
+        selectedDate =
+            cloneDate(END_DATE);
+
+    }
+
+    else {
+
+        selectedDate =
+            now;
+
+    }
+
+
+    calendarMonth =
+        new Date(
+            selectedDate.getFullYear(),
+            selectedDate.getMonth(),
+            1
+        );
+
+
+    renderCalendar();
+
+}
+
+
+/* =========================================================
+   ANALYTICS
+========================================================= */
+
+function renderStats() {
+
+    const stats =
+        calculateStats();
+
+
+    const xp =
+        calculateXP();
+
+
+    const percent =
+        Math.round(
+            stats.fullDays /
+            totalDays() *
+            100
+        );
+
+
+    document.getElementById(
+        "arcPercent"
+    ).textContent =
+        percent;
+
+
+    document.getElementById(
+        "jeeTotal"
+    ).textContent =
+        stats.jeeTotal.toFixed(1) +
+        "h";
+
+
+    document.getElementById(
+        "pyqTotal"
+    ).textContent =
+        stats.pyqTotal;
+
+
+    document.getElementById(
+        "gymTotal"
+    ).textContent =
+        stats.gymSessions;
+
+
+    document.getElementById(
+        "streak"
+    ).textContent =
+        stats.streak;
+
+
+    document.getElementById(
+        "bestStreak"
+    ).textContent =
+        stats.best;
+
+
+    document.getElementById(
+        "statsXP"
+    ).textContent =
+        xp.toLocaleString();
+
+
+    document.getElementById(
+        "fullDays"
+    ).textContent =
+        stats.fullDays;
+
+
+    document.getElementById(
+        "statsJee"
+    ).textContent =
+        stats.jeeTotal.toFixed(1) +
+        "h";
+
+
+    document.getElementById(
+        "statsGym"
+    ).textContent =
+        stats.gymSessions;
+
+
+    renderAchievements();
+
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+function renderAchievements() {
+
+    const stats =
+        calculateStats();
+
+    const xp =
+        calculateXP();
+
+
+    const achievements = [
+
+        {
+            icon: "🌱",
+            name: "First Step",
+            description: "Complete your first task.",
+            unlocked:
+                Object.values(data).some(
+                    d =>
+                        d &&
+                        d.checks &&
+                        d.checks.some(Boolean)
+                )
+        },
+
+        {
+            icon: "🔥",
+            name: "7 Day Streak",
+            description: "Build a 7 day full-day streak.",
+            unlocked:
+                stats.best >= 7
+        },
+
+        {
+            icon: "📚",
+            name: "Scholar",
+            description: "Reach 10 hours of JEE work.",
+            unlocked:
+                stats.jeeTotal >= 10
+        },
+
+        {
+            icon: "📝",
+            name: "PYQ Hunter",
+            description: "Solve 100 PYQs.",
+            unlocked:
+                stats.pyqTotal >= 100
+        },
+
+        {
+            icon: "🏋️",
+            name: "Built Different",
+            description: "Complete 10 gym sessions.",
+            unlocked:
+                stats.gymSessions >= 10
+        },
+
+        {
+            icon: "⚡",
+            name: "Ascending",
+            description: "Reach 10,000 XP.",
+            unlocked:
+                xp >= 10000
+        },
+
+        {
+            icon: "🗿",
+            name: "Unbreakable",
+            description: "Reach 40,000 XP.",
+            unlocked:
+                xp >= 40000
+        }
+
+    ];
+
+
+    const container =
+        document.getElementById(
+            "achievements"
+        );
+
+
+    container.innerHTML = "";
+
+
+    achievements.forEach(
+        achievement => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "achievement" +
+                (
+                    achievement.unlocked
+                    ? ""
+                    : " locked"
+                );
+
+
+            div.innerHTML = `
+
+                <div class="achievement-icon">
+                    ${achievement.icon}
+                </div>
+
+                <div>
+
+                    <strong>
+                        ${achievement.name}
+                    </strong>
+
+                    <br>
+
+                    <small>
+                        ${achievement.description}
+                    </small>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(div);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function setTimer(
+    minutes,
+    button
+) {
+
+    pauseTimer(
+        false
+    );
+
+
+    timerInitial =
+        minutes * 60;
+
+    timerSeconds =
+        timerInitial;
+
+
+    document
+        .querySelectorAll(
+            ".mode button"
+        )
+        .forEach(
+            btn =>
+                btn.classList.remove(
+                    "active"
+                )
+        );
+
+
+    if (button)
+        button.classList.add(
+            "active"
+        );
+
+
+    updateTimerDisplay();
+
+
+    document.getElementById(
+        "timerStatus"
+    ).textContent =
+        "Ready when you are.";
+
+}
+
+
+function updateTimerDisplay() {
+
+    const minutes =
+        Math.floor(
+            timerSeconds / 60
+        );
+
+
+    const seconds =
+        timerSeconds % 60;
+
+
+    document.getElementById(
+        "timerDisplay"
+    ).textContent =
+
+        String(minutes)
+            .padStart(2, "0")
+
+        + ":" +
+
+        String(seconds)
+            .padStart(2, "0");
+
+}
+
+
+function startTimer() {
+
+    if (timerRunning)
+        return;
+
+
+    timerRunning =
+        true;
+
+
+    document.getElementById(
+        "timerStatus"
+    ).textContent =
+        "🔥 FOCUS MODE — LOCK IN.";
+
+
+    timerInterval =
+        setInterval(
+            () => {
+
+                timerSeconds--;
+
+
+                updateTimerDisplay();
+
+
+                if (
+                    timerSeconds <= 0
+                ) {
+
+                    finishTimer();
+
+                }
+
+            },
+            1000
+        );
+
+}
+
+
+function pauseTimer(
+    updateStatus = true
+) {
+
+    timerRunning =
+        false;
+
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    timerInterval =
+        null;
+
+
+    if (
+        updateStatus
+    ) {
+
+        document.getElementById(
+            "timerStatus"
+        ).textContent =
+            "Paused.";
+
+    }
+
+}
+
+
+function resetTimer() {
+
+    pauseTimer();
+
+
+    timerSeconds =
+        timerInitial;
+
+
+    updateTimerDisplay();
+
+
+    document.getElementById(
+        "timerStatus"
+    ).textContent =
+        "Ready when you are.";
+
+}
+
+
+function finishTimer() {
+
+    pauseTimer(
+        false
+    );
+
+
+    timerSeconds =
+        0;
+
+
+    updateTimerDisplay();
+
+
+    const d =
+        getDay(
+            selectedDate
+        );
+
+
+    const minutes =
+        Math.round(
+            timerInitial / 60
+        );
+
+
+    d.focusMinutes =
+        Number(
+            d.focusMinutes || 0
+        ) +
+        minutes;
+
+
+    d.jee =
+        Number(
+            d.jee || 0
+        ) +
+        (
+            timerInitial /
+            3600
+        );
+
+
+    save();
+
+
+    document.getElementById(
+        "timerStatus"
+    ).textContent =
+        "✅ Focus session completed!";
+
+
+    renderAll();
+
+}
+
+
+/* =========================================================
+   CHART ENGINE
+========================================================= */
+
+function getLast14Days() {
+
+    const days = [];
+
+
+    const end =
+        cloneDate(
+            selectedDate
+        );
+
+
+    for (
+        let i = 13;
+        i >= 0;
+        i--
+    ) {
+
+        const d =
+            cloneDate(end);
+
+
+        d.setDate(
+            d.getDate() - i
+        );
+
+
+        days.push(d);
+
+    }
+
+
+    return days;
+
+}
+
+
+function drawChart(
+    canvasId,
+    values,
+    labels
+) {
+
+    const canvas =
+        document.getElementById(
+            canvasId
+        );
+
+
+    if (!canvas)
+        return;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    const width =
+        Math.max(
+            300,
+            Math.floor(
+                rect.width
+            )
+        );
+
+
+    const height =
+        220;
+
+
+    const dpr =
+        window.devicePixelRatio ||
+        1;
+
+
+    canvas.width =
+        width * dpr;
+
+    canvas.height =
+        height * dpr;
+
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    const padding = {
+
+        top: 18,
+        right: 18,
+        bottom: 32,
+        left: 42
+
+    };
+
+
+    const chartWidth =
+        width -
+        padding.left -
+        padding.right;
+
+
+    const chartHeight =
+        height -
+        padding.top -
+        padding.bottom;
+
+
+    const maxValue =
+        Math.max(
+            1,
+            ...values
+        );
+
+
+    /* GRID */
+
+    ctx.strokeStyle =
+        "#263449";
+
+    ctx.lineWidth =
+        1;
+
+
+    for (
+        let i = 0;
+        i <= 4;
+        i++
+    ) {
+
+        const y =
+            padding.top +
+            chartHeight -
+            (
+                chartHeight *
+                i /
+                4
+            );
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            padding.left,
+            y
+        );
+
+        ctx.lineTo(
+            width -
+            padding.right,
+            y
+        );
+
+        ctx.stroke();
+
+
+        ctx.fillStyle =
+            "#8996a9";
+
+        ctx.font =
+            "10px Arial";
+
+        ctx.textAlign =
+            "right";
+
+
+        const value =
+            Math.round(
+                maxValue *
+                i /
+                4
+            );
+
+
+        ctx.fillText(
+            value,
+            padding.left - 7,
+            y + 3
+        );
+
+    }
+
+
+    /* POINTS */
+
+    const points = [];
+
+
+    values.forEach(
+        (value, index) => {
+
+            const x =
+                padding.left +
+                (
+                    chartWidth *
+                    index /
+                    Math.max(
+                        1,
+                        values.length - 1
+                    )
+                );
+
+
+            const y =
+                padding.top +
+                chartHeight -
+                (
+                    value /
+                    maxValue *
+                    chartHeight
+                );
+
+
+            points.push({
+                x,
+                y
+            });
+
+        }
+    );
+
+
+    /* AREA */
+
+    if (points.length) {
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+            points[0].x,
+            padding.top +
+            chartHeight
+        );
+
+
+        points.forEach(
+            point => {
+
+                ctx.lineTo(
+                    point.x,
+                    point.y
+                );
+
+            }
+        );
+
+
+        ctx.lineTo(
+            points[
+                points.length - 1
+            ].x,
+            padding.top +
+            chartHeight
+        );
+
+
+        ctx.closePath();
+
+
+        const gradient =
+            ctx.createLinearGradient(
+                0,
+                padding.top,
+                0,
+                padding.top +
+                chartHeight
+            );
+
+
+        gradient.addColorStop(
+            0,
+            "rgba(138,184,255,.25)"
+        );
+
+
+        gradient.addColorStop(
+            1,
+            "rgba(138,184,255,0)"
+        );
+
+
+        ctx.fillStyle =
+            gradient;
+
+
+        ctx.fill();
+
+    }
+
+
+    /* LINE */
+
+    ctx.beginPath();
+
+
+    points.forEach(
+        (point, index) => {
+
+            if (
+                index === 0
+            ) {
+
+                ctx.moveTo(
+                    point.x,
+                    point.y
+                );
+
+            } else {
+
+                ctx.lineTo(
+                    point.x,
+                    point.y
+                );
+
+            }
+
+        }
+    );
+
+
+    ctx.strokeStyle =
+        "#8ab8ff";
+
+    ctx.lineWidth =
+        2.5;
+
+
+    ctx.stroke();
+
+
+    /* POINTS */
+
+    points.forEach(
+        point => {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                point.x,
+                point.y,
+                3,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "#8ab8ff";
+
+            ctx.fill();
+
+        }
+    );
+
+
+    /* LABELS */
+
+    ctx.fillStyle =
+        "#8996a9";
+
+    ctx.font =
+        "9px Arial";
+
+    ctx.textAlign =
+        "center";
+
+
+    labels.forEach(
+        (label, index) => {
+
+            if (
+                index % 2 !== 0
+            )
+                return;
+
+
+            const x =
+                padding.left +
+                (
+                    chartWidth *
+                    index /
+                    Math.max(
+                        1,
+                        labels.length - 1
+                    )
+                );
+
+
+            ctx.fillText(
+                label,
+                x,
+                height - 10
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CHART DATA
+========================================================= */
+
+function renderJeeChart() {
+
+    const days =
+        getLast14Days();
+
+
+    const values =
+        days.map(
+            date =>
+                Number(
+                    getDay(date).jee ||
+                    0
+                )
+        );
+
+
+    const labels =
+        days.map(
+            date =>
+                date.getDate()
+        );
+
+
+    drawChart(
+        "jeeChart",
+        values,
+        labels
+    );
+
+}
+
+
+function renderCompletionChart() {
+
+    const days =
+        getLast14Days();
+
+
+    const values =
+        days.map(
+            date =>
+                Math.round(
+                    completionCount(date) /
+                    TASKS.length *
+                    100
+                )
+        );
+
+
+    const labels =
+        days.map(
+            date =>
+                date.getDate()
+        );
+
+
+    drawChart(
+        "completionChart",
+        values,
+        labels
+    );
+
+}
+
+
+function calculateXPThroughDate(
+    targetDate
+) {
+
+    let xp = 0;
+
+
+    Object.keys(data)
+        .forEach(
+            key => {
+
+                if (
+                    key >
+                    dateKey(targetDate)
+                )
+                    return;
+
+
+                const d =
+                    data[key];
+
+
+                xp +=
+                    Number(
+                        d.jee || 0
+                    ) * 100;
+
+
+                xp +=
+                    Number(
+                        d.pyq || 0
+                    ) * 10;
+
+
+                if (d.gym)
+                    xp += 150;
+
+
+                if (d.checks) {
+
+                    xp +=
+                        d.checks
+                        .filter(Boolean)
+                        .length *
+                        25;
+
+                }
+
+            }
+        );
+
+
+    return Math.floor(xp);
+
+}
+
+
+function renderXPChart() {
+
+    const days =
+        getLast14Days();
+
+
+    const values =
+        days.map(
+            date =>
+                calculateXPThroughDate(
+                    date
+                )
+        );
+
+
+    const labels =
+        days.map(
+            date =>
+                date.getDate()
+        );
+
+
+    drawChart(
+        "xpChart",
+        values,
+        labels
+    );
+
+}
+
+
+function renderGraphs() {
+
+    renderJeeChart();
+
+    renderCompletionChart();
+
+    renderXPChart();
+
+}
+
+
+/* =========================================================
+   MASTER RENDER
+========================================================= */
+
+function renderAll() {
+
+    renderToday();
+
+    renderRank();
+
+    renderStats();
+
+    renderCalendar();
+
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        setTimeout(
+            renderGraphs,
+            100
+        );
+
+    }
+);
+
+
+/* =========================================================
+   START APP
+========================================================= */
+
+renderAll();
+
+updateTimerDisplay();
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://zangrvggbiervlfjhscp.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_9Jo7D6uHfMcXxzpgatx9qA_GOLy4N4G";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+console.log("Winter Arc Supabase connected!");
+</script>
+</body>
+</html>
